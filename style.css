@@ -101,18 +101,22 @@ h1, h2 {
 
 @keyframes quiz-fade-out {
     0% {
+        right: 0;
         opacity: 1;
     }
     100% {
+        right: 200px;
         opacity: 0;
     }
 }
 
 @keyframes quiz-fade-in {
     0% {
+        left: 200px;
         opacity: 0;
     }
     100% {
+        left: 0;
         opacity: 1;
     }
 }
