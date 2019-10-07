@@ -3,6 +3,7 @@ var questionNum = 0;
 var optionButtons = [document.querySelector("#quizOption1"), document.querySelector("#quizOption2"),
 document.querySelector("#quizOption3"), document.querySelector("#quizOption4")]
 
+// Do some fancy animations to hide the title screen and show the quiz
 function startQuiz() {
     document.querySelector("#titleScreen").style = "animation-play-state: running;"
     document.querySelector(".navbar-text").textContent = "Time: " + time;
