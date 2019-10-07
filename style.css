@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin-top: 40px;
+    max-width: 800px;
+    width: 80%;
+}
+
+#titleScreen {
+    text-align: center;
+    margin: auto;
+    position: relative;
+    animation-name: title-slide-out;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+    animation-duration: 0.40s;
+    animation-play-state: paused;
+}
+
+h1, h2 {
+    font-weight: bolder;
+    margin-bottom: 30px;
+}
+
+.navbar-brand, .navbar-brand:hover, .navbar-brand:active {
+    color: #800080;
+}
+
+.btn-primary {
+    background: #af00af;
+    border-color: #af00af;
+}
+
+.btn-primary:hover {
+    background-color: #da45da;
+    border-color: #da45da;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show > .btn-primary.dropdown-toggle {
+    background: #800080;
+    border-color: #800080;
+}
+
+.btnOption {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#questionBlock {
+    display: none;
+    text-align: left;
+    margin: left;
+    position: relative;
+    animation-name: quiz-slide-in;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+    animation-duration: 0.50s;
+    animation-play-state: paused;
+}
+
+.questionFadeOut {
+    animation-name: quiz-fade-out;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.30s;
+    animation-play-state: running;
+}
+
+.questionFadeIn {
+    animation-name: quiz-fade-in;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.30s;
+    animation-play-state: running;
+}
+
+@keyframes title-slide-out {
+    0% {
+        bottom: 0;
+        opacity: 1;
+    }
+    100% {
+        bottom: 300px;
+        opacity: 0;
+    }
+}
+
+@keyframes quiz-slide-in {
+    0% {
+        top: 200px;
+        opacity: 0;
+    }
+    100% {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes quiz-fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes quiz-fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
