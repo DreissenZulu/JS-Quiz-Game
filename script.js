@@ -10,7 +10,8 @@ function startQuiz() {
 
     setTimeout(function () {
         document.querySelector("#titleScreen").style = "display: none;";
-        document.querySelector("#questionBlock").style = "display: block; animation-play-state: running;";
+        document.querySelector("#questionBlock").style = "display: block;";
+        document.querySelector("#questionBlock").className = "questionSlideIn";
     }, 400);
     var timeLimit = setInterval(function () {
         time--;
@@ -23,27 +24,32 @@ function startQuiz() {
 
 // changeQuestion operates only when the element clicked is a button
 function changeQuestion() {
-    // document.querySelector("#questionBlock").className = "questionFadeOut";
-    // setTimeout(function () {
-    //     document.querySelector("#questionBlock").className = "questionFadeIn";
-    // }, 300);
     if (event.target.nodeName == "BUTTON") {
         // If there's a value in the button (ie. an answer, check if it's correct)
-        if (event.target.value){
-            checkAnswer(event.target.value);
+        var playerAnswer = event.target.value;
+        if (playerAnswer) {
+            checkAnswer(playerAnswer);
+            document.querySelector("#questionBlock").className = "questionFadeOut";
         }
+        // Load the next question object...
         var questionInfo = questions[questionNum];
 
+        // ...If there are no questions left, end the function...
         if (questionInfo == undefined) {
             console.log(`There's no questions left...!`);
             return;
         }
-        document.querySelector("#questionPrompt").textContent = questionInfo.title;
-        for (var i = 0; i < optionButtons.length; i++) {
-            optionButtons[i].textContent = questionInfo.choices[i];
-            optionButtons[i].value = questionInfo.choices[i];
-        }
-        questionNum++;
+        // ...Otherwise write the information into the next question
+        setTimeout(function () {
+            for (var i = 0; i < optionButtons.length; i++) {
+                optionButtons[i].textContent = questionInfo.choices[i];
+                optionButtons[i].value = questionInfo.choices[i];
+            }
+            document.querySelector("#questionPrompt").textContent = questionInfo.title;
+            questionNum++;
+            document.querySelector("#questionBlock").className = "questionFadeIn";
+        }, 400);
+
     }
 }
 

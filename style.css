@@ -54,11 +54,13 @@ h1, h2 {
     text-align: left;
     margin: left;
     position: relative;
+}
+
+.questionSlideIn {
     animation-name: quiz-slide-in;
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
     animation-duration: 0.50s;
-    animation-play-state: paused;
 }
 
 .questionFadeOut {
@@ -66,7 +68,6 @@ h1, h2 {
     animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
     animation-duration: 0.30s;
-    animation-play-state: running;
 }
 
 .questionFadeIn {
@@ -74,7 +75,6 @@ h1, h2 {
     animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
     animation-duration: 0.30s;
-    animation-play-state: running;
 }
 
 @keyframes title-slide-out {
