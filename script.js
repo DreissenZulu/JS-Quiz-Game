@@ -24,39 +24,39 @@ function startQuiz() {
 
 // changeQuestion operates only when the element clicked is a button
 function changeQuestion() {
+    // Load the next question object...
+    var questionInfo = questions[questionNum];
+
+    // ...If there are no questions left, end the function...
+    if (questionInfo == undefined) {
+        console.log(`There's no questions left...!`);
+        return;
+    }
+    // ...Otherwise write the information into the next question
+    setTimeout(function () {
+        for (var i = 0; i < optionButtons.length; i++) {
+            optionButtons[i].textContent = questionInfo.choices[i];
+            optionButtons[i].value = questionInfo.choices[i];
+        }
+        document.querySelector("#questionPrompt").textContent = questionInfo.title;
+        document.querySelector("#questionBlock").className = "questionFadeIn";
+    }, 400);
+
+}
+
+function checkAnswer() {
     if (event.target.nodeName == "BUTTON") {
         // If there's a value in the button (ie. an answer, check if it's correct)
         var playerAnswer = event.target.value;
         if (playerAnswer) {
-            checkAnswer(playerAnswer);
             document.querySelector("#questionBlock").className = "questionFadeOut";
-        }
-        // Load the next question object...
-        var questionInfo = questions[questionNum];
-
-        // ...If there are no questions left, end the function...
-        if (questionInfo == undefined) {
-            console.log(`There's no questions left...!`);
-            return;
-        }
-        // ...Otherwise write the information into the next question
-        setTimeout(function () {
-            for (var i = 0; i < optionButtons.length; i++) {
-                optionButtons[i].textContent = questionInfo.choices[i];
-                optionButtons[i].value = questionInfo.choices[i];
-            }
-            document.querySelector("#questionPrompt").textContent = questionInfo.title;
+            console.log(`Choice: ${playerAnswer}, Answer: ${questions[questionNum].answer}`);
             questionNum++;
-            document.querySelector("#questionBlock").className = "questionFadeIn";
-        }, 400);
-
+        }
+        changeQuestion();
     }
 }
 
-function checkAnswer(answer) {
-    console.log(answer);
-}
-
 document.querySelector("#quizStart").onclick = startQuiz;
-document.addEventListener("click", changeQuestion);
+document.addEventListener("click", checkAnswer);
 
