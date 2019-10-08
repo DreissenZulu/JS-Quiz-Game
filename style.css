@@ -56,8 +56,15 @@ h1, h2 {
     position: relative;
 }
 
-.questionSlideIn {
-    animation-name: quiz-slide-in;
+.slideUp {
+    animation-name: slide-up;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+    animation-duration: 0.50s;
+}
+
+.slideDown {
+    animation-name: slide-down;
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
     animation-duration: 0.50s;
@@ -88,13 +95,24 @@ h1, h2 {
     }
 }
 
-@keyframes quiz-slide-in {
+@keyframes slide-up {
     0% {
         top: 200px;
         opacity: 0;
     }
     100% {
         top: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes slide-down {
+    0% {
+        top: 0;
+        opacity: 0;
+    }
+    100% {
+        top: 200px;
         opacity: 1;
     }
 }
