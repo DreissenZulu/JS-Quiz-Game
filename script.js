@@ -18,7 +18,7 @@ function startQuiz() {
     setTimeout(function () {
         document.querySelector("#titleScreen").style = "display: none;";
         document.querySelector("#questionBlock").style = "display: block;";
-        document.querySelector("#questionBlock").className = "questionSlideIn";
+        document.querySelector("#questionBlock").className = "slideUp";
     }, 400);
 
     // Show and start the time limit
