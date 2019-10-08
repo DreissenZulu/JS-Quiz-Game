@@ -1,3 +1,4 @@
+var answerText = "";
 var time = 15 * questions.length;
 var timeLimit;
 var questionDiv = document.querySelector("#questionBlock");
@@ -69,14 +70,29 @@ function checkAnswer() {
         if (playerAnswer) {
             // The current question slides out as the answer is checked to make way for the next question
             if (playerAnswer === questions[questionNum].answer) {
-
+                answerText = "Correct!";
+            // If the answer is wrong, deduct 15 seconds from the remaining time. 
+            // If there is not enough time left over, set time to 0
             } else {
+                answerText = "Wrong!";
                 time -= 15;
                 if (time < 0) {
                     time = 0;
-                    document.querySelector(".navbar-text").textContent = "Time: " + time;
                 }
             }
+            
+            // This block shows the result of the answer, then hides it after a given time.
+            document.querySelector("#answerResult").innerHTML = `<hr /> ${answerText}`
+            document.querySelector("#answerResult").style = "display: block;";
+            document.querySelector("#answerResult").className = "answerSlideUp";
+            setTimeout(function() {
+                document.querySelector("#answerResult").className = "fadeAway";
+                setTimeout(function () {
+                    document.querySelector("#answerResult").style = "display: none;";
+                }, 300);
+            }, 1000);
+
+            // Slide away the current question to prepare the next
             questionDiv.className = "questionFadeOut";
             console.log(`Choice: ${playerAnswer}, Answer: ${questions[questionNum].answer}`);
         }
@@ -90,6 +106,8 @@ function showEndGame() {
     if (questionDiv.className != "questionFadeOut") {
         questionDiv.className = "questionFadeOut";
     }
+    // Rewrites remaining time if the final question was wrong
+    document.querySelector(".navbar-text").textContent = "Time: " + time;
 
     if (time != 0) {
         document.querySelector("#showScore").textContent = time;
@@ -99,6 +117,7 @@ function showEndGame() {
 
     setTimeout(function () {
         questionDiv.style = "display: none;";
+        document.querySelector("#answerResult").style = "display: none;";
         endGameDiv.style = "display: block;";
         endGameDiv.className = "slideDown";
     }, 700)
