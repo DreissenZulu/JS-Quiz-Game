@@ -34,6 +34,14 @@
     position: relative;
 }
 
+#answerResult {
+    display: none;
+    position: fixed;
+    color: darkgray;
+    font-style: italic;
+    font-size: 18pt;
+}
+
 #showScore {
     line-height: 0.8;
     margin-bottom: 20px;
@@ -71,6 +79,13 @@ h1, h2 {
 }
 
 /* Animation styles */
+.answerSlideUp {
+    animation-name: answer-slide-up;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+    animation-duration: 0.30s;
+}
+
 .slideUp {
     animation-name: slide-up;
     animation-fill-mode: forwards;
@@ -99,6 +114,13 @@ h1, h2 {
     animation-duration: 0.30s;
 }
 
+.fadeAway {
+    animation-name: fade-away;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    animation-duration: 0.30s;
+}
+
 @keyframes title-slide-out {
     0% {
         bottom: 0;
@@ -106,6 +128,28 @@ h1, h2 {
     }
     100% {
         bottom: 300px;
+        opacity: 0;
+    }
+}
+
+@keyframes answer-slide-up {
+    0% {
+        bottom: 30%;
+        opacity: 0;
+    }
+    100% {
+        bottom: 50%;
+        opacity: 1;
+    }
+}
+
+@keyframes fade-away {
+    0% {
+        bottom: 50%;
+        opacity: 1;
+    }
+    100% {
+        bottom: 50%;
         opacity: 0;
     }
 }
@@ -151,5 +195,29 @@ h1, h2 {
     100% {
         left: 0;
         opacity: 1;
+    }
+}
+
+@media (max-width: 767px) {
+    @keyframes answer-slide-up {
+        0% {
+            bottom: 0;
+            opacity: 0;
+        }
+        100% {
+            bottom: 20%;
+            opacity: 1;
+        }
+    }
+    
+    @keyframes fade-away {
+        0% {
+            bottom: 20%;
+            opacity: 1;
+        }
+        100% {
+            bottom: 20%;
+            opacity: 0;
+        }
     }
 }
