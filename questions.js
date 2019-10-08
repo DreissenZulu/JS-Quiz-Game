@@ -17,7 +17,7 @@ var questions = [
     },
     {
         title: "Which of the following is NOT a method to call an element with class 'example'?",
-        choices: ["document.getElementsByClassName('example');", "document.body.example;", "document.querySelector('.example')", "document.querySelectorAll('.example')[0]"],
+        choices: ["document.getElementsByClassName( 'example');", "document.body.example;", "document.querySelector( '.example')", "document.querySelectorAll( '.example')[0]"],
         answer: "document.body.example;"
     },
     {
