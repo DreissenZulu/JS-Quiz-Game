@@ -3,10 +3,12 @@ var answerText = "";
 var time = 15 * questions.length;
 var timeLimit;
 var questionDiv = document.querySelector("#questionBlock");
+var answerDiv = document.querySelector("#answerResult");
 var endGameDiv = document.querySelector("#endGameBlock");
 var questionNum = 0;
 var optionButtons = [document.querySelector("#quizOption1"), document.querySelector("#quizOption2"),
 document.querySelector("#quizOption3"), document.querySelector("#quizOption4")]
+document.querySelector("#inputInitials").value = '';
 
 // Do some fancy animations to hide the title screen and show the quiz
 function startQuiz() {
@@ -83,15 +85,17 @@ function checkAnswer() {
             }
             
             // This block shows the result of the answer, then hides it after a given time.
-            document.querySelector("#answerResult").innerHTML = `<hr /> ${answerText}`
-            document.querySelector("#answerResult").style = "display: block;";
-            document.querySelector("#answerResult").className = "answerSlideUp";
+            answerDiv.innerHTML = `<hr /> ${answerText}`
+            if (answerDiv.style != "display: block;"){
+                answerDiv.style = "display: block;";
+            }
+            answerDiv.className = "answerSlideUp";
             setTimeout(function() {
-                document.querySelector("#answerResult").className = "fadeAway";
+                answerDiv.className = "fadeAway";
                 setTimeout(function () {
-                    document.querySelector("#answerResult").style = "display: none;";
+                    answerDiv.style = "display: none;";
                 }, 300);
-            }, 1000);
+            }, 700);
 
             // Slide away the current question to prepare the next
             questionDiv.className = "questionFadeOut";
@@ -120,7 +124,7 @@ function showEndGame() {
     }
     setTimeout(function () {
         questionDiv.style = "display: none;";
-        document.querySelector("#answerResult").style = "display: none;";
+        answerDiv.style = "display: none;";
         endGameDiv.style = "display: block;";
         endGameDiv.className = "slideDown";
     }, 700)
