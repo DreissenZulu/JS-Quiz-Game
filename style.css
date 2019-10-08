@@ -34,6 +34,13 @@
     position: relative;
 }
 
+#showScore {
+    line-height: 0.8;
+    margin-bottom: 20px;
+    font-size: 8em;
+    font-weight: bolder;
+}
+
 h1, h2 {
     font-weight: bolder;
     margin-bottom: 30px;
