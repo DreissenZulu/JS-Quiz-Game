@@ -28,7 +28,7 @@ function startQuiz() {
     timeLimit = setInterval(function () {
         time--;
         document.querySelector(".navbar-text").textContent = "Time: " + time;
-        if (time == 0) {
+        if (time <= 0) {
             clearInterval(timeLimit);
             showEndGame();
         }
@@ -68,6 +68,15 @@ function checkAnswer() {
         var playerAnswer = event.target.value;
         if (playerAnswer) {
             // The current question slides out as the answer is checked to make way for the next question
+            if (playerAnswer === questions[questionNum].answer) {
+
+            } else {
+                time -= 15;
+                if (time < 0) {
+                    time = 0;
+                    document.querySelector(".navbar-text").textContent = "Time: " + time;
+                }
+            }
             questionDiv.className = "questionFadeOut";
             console.log(`Choice: ${playerAnswer}, Answer: ${questions[questionNum].answer}`);
         }
@@ -81,6 +90,13 @@ function showEndGame() {
     if (questionDiv.className != "questionFadeOut") {
         questionDiv.className = "questionFadeOut";
     }
+
+    if (time != 0) {
+        document.querySelector("#showScore").textContent = time;
+    } else {
+        document.querySelector("#showScore").textContent = "DNF";
+    }
+
     setTimeout(function () {
         questionDiv.style = "display: none;";
         endGameDiv.style = "display: block;";
