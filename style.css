@@ -20,6 +20,20 @@
     animation-play-state: paused;
 }
 
+#questionBlock {
+    display: none;
+    text-align: left;
+    margin: left;
+    position: relative;
+}
+
+#endGameBlock {
+    display: none;
+    text-align: center;
+    margin: auto;
+    position: relative;
+}
+
 h1, h2 {
     font-weight: bolder;
     margin-bottom: 30px;
@@ -49,13 +63,7 @@ h1, h2 {
     margin-bottom: 5px;
 }
 
-#questionBlock {
-    display: none;
-    text-align: left;
-    margin: left;
-    position: relative;
-}
-
+/* Animation styles */
 .slideUp {
     animation-name: slide-up;
     animation-fill-mode: forwards;
@@ -67,7 +75,7 @@ h1, h2 {
     animation-name: slide-down;
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
-    animation-duration: 0.50s;
+    animation-duration: 0.70s;
 }
 
 .questionFadeOut {
@@ -108,11 +116,11 @@ h1, h2 {
 
 @keyframes slide-down {
     0% {
-        top: 0;
+        bottom: 100px;
         opacity: 0;
     }
     100% {
-        top: 200px;
+        bottom: 0;
         opacity: 1;
     }
 }

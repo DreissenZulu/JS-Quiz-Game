@@ -1,4 +1,7 @@
 var time = 15 * questions.length;
+var timeLimit;
+var questionDiv = document.querySelector("#questionBlock");
+var endGameDiv = document.querySelector("#endGameBlock");
 var questionNum = 0;
 var optionButtons = [document.querySelector("#quizOption1"), document.querySelector("#quizOption2"),
 document.querySelector("#quizOption3"), document.querySelector("#quizOption4")]
@@ -21,12 +24,13 @@ function startQuiz() {
         document.querySelector("#questionBlock").className = "slideUp";
     }, 400);
 
-    // Show and start the time limit
-    var timeLimit = setInterval(function () {
+    // Show and start the time limit. Stop the timer if there's no time left and show the end screen
+    timeLimit = setInterval(function () {
         time--;
         document.querySelector(".navbar-text").textContent = "Time: " + time;
         if (time == 0) {
             clearInterval(timeLimit);
+            showEndGame();
         }
     }, 1000);
 }
@@ -36,21 +40,23 @@ function changeQuestion() {
     // Load the next question object...
     var questionInfo = questions[questionNum];
 
-    // ...If there are no questions left, end the function...
+    // ...If there are no questions left, end the function and stop the timer ...
     if (questionInfo == undefined) {
         console.log(`There's no questions left...!`);
+        clearInterval(timeLimit);
+        showEndGame();
         return;
     }
 
     // ...Otherwise write the information into the next question...
     setTimeout(function () {
         for (var i = 0; i < optionButtons.length; i++) {
-            optionButtons[i].textContent = questionInfo.choices[i];
+            optionButtons[i].textContent = i+1 + '. ' + questionInfo.choices[i];
             optionButtons[i].value = questionInfo.choices[i];
         }
         document.querySelector("#questionPrompt").textContent = questionInfo.title;
         // ...And show the question
-        document.querySelector("#questionBlock").className = "questionFadeIn";
+        questionDiv.className = "questionFadeIn";
     }, 400);
 
 }
@@ -62,13 +68,24 @@ function checkAnswer() {
         var playerAnswer = event.target.value;
         if (playerAnswer) {
             // The current question slides out as the answer is checked to make way for the next question
-            document.querySelector("#questionBlock").className = "questionFadeOut";
+            questionDiv.className = "questionFadeOut";
             console.log(`Choice: ${playerAnswer}, Answer: ${questions[questionNum].answer}`);
         }
         // questionNum is iterated and the next question is called
         questionNum++;
         changeQuestion();
     }
+}
+
+function showEndGame() {
+    if (questionDiv.className != "questionFadeOut") {
+        questionDiv.className = "questionFadeOut";
+    }
+    setTimeout(function () {
+        questionDiv.style = "display: none;";
+        endGameDiv.style = "display: block;";
+        endGameDiv.className = "slideDown";
+    }, 700)
 }
 
 document.querySelector("#quizStart").onclick = startQuiz;
