@@ -3,12 +3,22 @@ var answerText = "";
 var time = 15 * questions.length;
 var timeLimit;
 var questionDiv = document.querySelector("#questionBlock");
+var alertBoxDiv = document.querySelector("#alertBox");
 var answerDiv = document.querySelector("#answerResult");
 var endGameDiv = document.querySelector("#endGameBlock");
-var questionNum = 0;
 var optionButtons = [document.querySelector("#quizOption1"), document.querySelector("#quizOption2"),
 document.querySelector("#quizOption3"), document.querySelector("#quizOption4")]
-document.querySelector("#inputInitials").value = '';
+var playerInitials = document.querySelector("#playerInitials");
+var questionNum = 0;
+var scoresArray;
+playerInitials.value = '';
+
+// If a local high scores array exists, import it, otherwise initialize the array
+if (localStorage.getItem("localHighScores")) {
+    scoresArray = JSON.parse(localStorage.getItem("localHighScores"));
+} else {
+    scoresArray = [];
+}
 
 // Do some fancy animations to hide the title screen and show the quiz
 function startQuiz() {
@@ -46,7 +56,6 @@ function changeQuestion() {
 
     // ...If there are no questions left, stop the timer and end the function...
     if (questionInfo == undefined) {
-        console.log(`There's no questions left...!`);
         clearInterval(timeLimit);
         showEndGame();
         return;
@@ -55,7 +64,7 @@ function changeQuestion() {
     // ...Otherwise write the information into the next question...
     setTimeout(function () {
         for (var i = 0; i < optionButtons.length; i++) {
-            optionButtons[i].textContent = i+1 + '. ' + questionInfo.choices[i];
+            optionButtons[i].textContent = i + 1 + '. ' + questionInfo.choices[i];
             optionButtons[i].value = questionInfo.choices[i];
         }
         document.querySelector("#questionPrompt").textContent = questionInfo.title;
@@ -68,29 +77,26 @@ function changeQuestion() {
 // Checks the user input and compares it with the answer on file.
 function checkAnswer() {
     if (event.target.nodeName == "BUTTON") {
-        // If there's a value in the button (ie. an answer) check if it's correct
         var playerAnswer = event.target.value;
         if (playerAnswer) {
-            // The current question slides out as the answer is checked to make way for the next question
             if (playerAnswer === questions[questionNum].answer) {
                 answerText = "Correct!";
-            // If the answer is wrong, deduct 15 seconds from the remaining time. 
-            // If there is not enough time left over, set time to 0
+                // If there is not enough time left over, set time to 0
             } else {
                 answerText = "Wrong!";
                 time -= 15;
-                if (time < 0) {
+                if (time <= 0) {
                     time = 0;
                 }
             }
-            
+
             // This block shows the result of the answer, then hides it after a given time.
             answerDiv.innerHTML = `<hr /> ${answerText}`
-            if (answerDiv.style != "display: block;"){
+            if (answerDiv.style != "display: block;") {
                 answerDiv.style = "display: block;";
             }
             answerDiv.className = "answerSlideUp";
-            setTimeout(function() {
+            setTimeout(function () {
                 answerDiv.className = "fadeAway";
                 setTimeout(function () {
                     answerDiv.style = "display: none;";
@@ -99,7 +105,6 @@ function checkAnswer() {
 
             // Slide away the current question to prepare the next
             questionDiv.className = "questionFadeOut";
-            console.log(`Choice: ${playerAnswer}, Answer: ${questions[questionNum].answer}`);
         }
         // questionNum is iterated and the next question is called
         questionNum++;
@@ -130,8 +135,29 @@ function showEndGame() {
     }, 700)
 }
 
+function submitAndSaveScore(event) {
+    event.preventDefault();
+    if (playerInitials.value.trim() == '') {
+        if (alertBoxDiv.style != "display:block;") {
+            alertBoxDiv.style = "display:block;";
+
+            setTimeout(function () {
+                alertBoxDiv.style = "display: none;";
+            }, 1000);
+        }
+        return;
+    } else {
+        console.log(`${playerInitials.value.trim()} scored ${time} points!`)
+        var newHighScore = {
+            initials: playerInitials.value.trim(),
+            score: time
+        };
+    }
+}
+
 // The only event listeners in the entire script
-// It's kind of sad, really. Two dinky little lines.
+// It's kind of sad, really. Three dinky little lines.
 document.querySelector("#quizStart").onclick = startQuiz;
 document.addEventListener("click", checkAnswer);
+document.querySelector("#submitButton").onclick = submitAndSaveScore;
 
