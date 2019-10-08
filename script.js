@@ -1,3 +1,4 @@
+// Initialize globals
 var answerText = "";
 var time = 15 * questions.length;
 var timeLimit;
@@ -41,7 +42,7 @@ function changeQuestion() {
     // Load the next question object...
     var questionInfo = questions[questionNum];
 
-    // ...If there are no questions left, end the function and stop the timer ...
+    // ...If there are no questions left, stop the timer and end the function...
     if (questionInfo == undefined) {
         console.log(`There's no questions left...!`);
         clearInterval(timeLimit);
@@ -103,18 +104,20 @@ function checkAnswer() {
 }
 
 function showEndGame() {
-    if (questionDiv.className != "questionFadeOut") {
-        questionDiv.className = "questionFadeOut";
-    }
     // Rewrites remaining time if the final question was wrong
     document.querySelector(".navbar-text").textContent = "Time: " + time;
 
+    // Writes the final score to showScore
     if (time != 0) {
         document.querySelector("#showScore").textContent = time;
     } else {
         document.querySelector("#showScore").textContent = "DNF";
     }
 
+    // Animation handlers
+    if (questionDiv.className != "questionFadeOut") {
+        questionDiv.className = "questionFadeOut";
+    }
     setTimeout(function () {
         questionDiv.style = "display: none;";
         document.querySelector("#answerResult").style = "display: none;";
@@ -123,6 +126,8 @@ function showEndGame() {
     }, 700)
 }
 
+// The only event listeners in the entire script
+// It's kind of sad, really. Two dinky little lines.
 document.querySelector("#quizStart").onclick = startQuiz;
 document.addEventListener("click", checkAnswer);
 
