@@ -49,6 +49,12 @@
     font-weight: bolder;
 }
 
+#alertBox {
+    margin: auto;
+    margin-top: 15px;
+    max-width: 400px;
+}
+
 h1, h2 {
     font-weight: bolder;
     margin-bottom: 30px;
@@ -114,6 +120,13 @@ h1, h2 {
     animation-duration: 0.30s;
 }
 
+.fadeInOut {
+    animation-name: fade-in-out;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1.00s;
+}
+
 .fadeAway {
     animation-name: fade-away;
     animation-fill-mode: forwards;
@@ -140,6 +153,21 @@ h1, h2 {
     100% {
         bottom: 50%;
         opacity: 1;
+    }
+}
+
+@keyframes fade-in-out {
+    0% {
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
     }
 }
 
