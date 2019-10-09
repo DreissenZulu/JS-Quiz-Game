@@ -64,6 +64,15 @@ h1, h2 {
     color: #800080;
 }
 
+.scoreAltColour {
+    background-color: rgb(249, 182, 255);
+}
+
+.scoreStyle {
+    padding: 3px 3px 3px 10px;
+    font-size: 16pt;
+}
+
 .btn-primary {
     background: #af00af;
     border-color: #af00af;
