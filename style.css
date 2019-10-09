@@ -105,6 +105,7 @@ h1, h2 {
     animation-name: slide-up;
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
+    animation-iteration-count: 1;
     animation-duration: 0.50s;
 }
 
