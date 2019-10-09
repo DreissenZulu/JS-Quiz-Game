@@ -22,7 +22,6 @@ if (localStorage.getItem("localHighScores")) {
 
 // Do some fancy animations to hide the title screen and show the quiz
 function startQuiz() {
-    // Prevents checkAnswer function from running at the same time as startQuiz
     event.stopPropagation();
 
     document.querySelector("#titleScreen").style = "animation-play-state: running;"
@@ -38,7 +37,6 @@ function startQuiz() {
         document.querySelector("#questionBlock").className = "slideUp";
     }, 400);
 
-    // Show and start the time limit. Stop the timer if there's no time left and show the end screen
     timeLimit = setInterval(function () {
         time--;
         document.querySelector(".navbar-text").textContent = "Time: " + time;
@@ -51,7 +49,6 @@ function startQuiz() {
 
 // changeQuestion operates only when the element clicked is a button
 function changeQuestion() {
-    // Load the next question object...
     var questionInfo = questions[questionNum];
 
     // ...If there are no questions left, stop the timer and end the function...
@@ -152,6 +149,9 @@ function submitAndSaveScore(event) {
             initials: playerInitials.value.trim(),
             score: time
         };
+        scoresArray.push(newHighScore);
+        localStorage.setItem("localHighScores", JSON.stringify(scoresArray));
+        window.location.href = "./scores.html"
     }
 }
 
