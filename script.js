@@ -7,7 +7,7 @@ var alertBoxDiv = document.querySelector("#alertBox");
 var answerDiv = document.querySelector("#answerResult");
 var endGameDiv = document.querySelector("#endGameBlock");
 var optionButtons = [document.querySelector("#quizOption1"), document.querySelector("#quizOption2"),
-document.querySelector("#quizOption3"), document.querySelector("#quizOption4")]
+                    document.querySelector("#quizOption3"), document.querySelector("#quizOption4")]
 var playerInitials = document.querySelector("#playerInitials");
 var questionNum = 0;
 var scoresArray;
