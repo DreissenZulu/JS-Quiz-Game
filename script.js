@@ -146,10 +146,11 @@ function submitAndSaveScore(event) {
     } else {
         console.log(`${playerInitials.value.trim()} scored ${time} points!`)
         var newHighScore = {
-            initials: playerInitials.value.trim(),
+            initials: playerInitials.value.toUpperCase().trim(),
             score: time
         };
         scoresArray.push(newHighScore);
+        scoresArray.sort(function(a, b) {return b.score - a.score});
         localStorage.setItem("localHighScores", JSON.stringify(scoresArray));
         window.location.href = "./scores.html"
     }
@@ -160,4 +161,3 @@ function submitAndSaveScore(event) {
 document.querySelector("#quizStart").onclick = startQuiz;
 document.addEventListener("click", checkAnswer);
 document.querySelector("#submitButton").onclick = submitAndSaveScore;
-
