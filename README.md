@@ -6,6 +6,17 @@ This is a JavaScript quiz game presented in a multiple choice question format. I
 
 When the last question is answered, or when time runs out, the player will be taken to a submission page where they can enter their initials. When submitted, a high score chart is updated and saved locally, and the player is taken to a page showing all the scores logged on their PC. The player can choose to clear the high scores list from this page.
 
+## Approach
+For the JavaScript portion of the assignment, I wanted to focus on breaking down the big problem (making a local competitive quiz game) into smaller problems I could tackle one at a time. I was able to divide the assignment into a few parts:
+1. Hide the title screen when the user clicks "Start Quiz" and display the first question
+2. When the quiz begins, start the quiz timer
+2. When the user selects an answer, show the next question
+3. When an answer is selected, check if it's right or wrong and show the result
+4. When there are no questions left, or when time runs out, hide the quiz and show the final result
+5. Receive text from the user to then save to the local leaderboard
+6. Send the user to the high scores page
+
+Using this approach, I focused on blocking out each section as their own individual functions, designed to accomplish one task or lead into another task if it made sense to connect them to each other.
 
 ## Challenges
 For this project I wanted to make sure I understood the new topics covered in class. This involved using many of the functions and methods we covered last week and this week. Before beginning any of the major JavaScript parts, I wanted to begin styling my page by using Bootstrap and CSS animations. While attaching the animations to Javascript to allow them to play wasn't an issue at first, switching between animations for the main question div provided my first roadblock. This issue was quickly resolved by removing the animation set from the question's main styling, and instead calling each separate animation using className in JavaScript when I wanted it.
