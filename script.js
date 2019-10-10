@@ -7,7 +7,7 @@ var alertBoxDiv = document.querySelector("#alertBox");
 var answerDiv = document.querySelector("#answerResult");
 var endGameDiv = document.querySelector("#endGameBlock");
 var optionButtons = [document.querySelector("#quizOption1"), document.querySelector("#quizOption2"),
-                    document.querySelector("#quizOption3"), document.querySelector("#quizOption4")]
+document.querySelector("#quizOption3"), document.querySelector("#quizOption4")]
 var playerInitials = document.querySelector("#playerInitials");
 var questionNum = 0;
 var scoresArray;
@@ -144,13 +144,12 @@ function submitAndSaveScore(event) {
         }
         return;
     } else {
-        console.log(`${playerInitials.value.trim()} scored ${time} points!`)
         var newHighScore = {
             initials: playerInitials.value.toUpperCase().trim(),
             score: time
         };
         scoresArray.push(newHighScore);
-        scoresArray.sort(function(a, b) {return b.score - a.score});
+        scoresArray.sort(function (a, b) { return b.score - a.score });
         localStorage.setItem("localHighScores", JSON.stringify(scoresArray));
         window.location.href = "./scores.html"
     }
